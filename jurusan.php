@@ -80,7 +80,7 @@
 								</td>
 								<td>
 									<a href="jurusan.php?aksi=delete&id_jurusan='.$row['id_jurusan'].'" title="Hapus Data" onclick="return confirm(\'Anda yakin akan menghapus data '.$row['nama_jurusan'].'?\')" class="btn btn-danger btn-sm"><span  aria-hidden="true"></span>Hapus</a>
-									<a href="edit_jurusan.php?id_jurusan='.$row['id_jurusan'].'" title="Edit Data" onclick="return confirm(\'Anda yakin akan mengedit data '.$row['nama-jurusan'].'?\')" class="btn btn-sm btn-primary"><span  aria-hidden="true"></span> Edit </a>
+									<a href="edit_jurusan.php?id_jurusan='.$row['id_jurusan'].'" title="Edit Data" onclick="return confirm(\'Anda yakin akan mengedit data '.$row['nama_jurusan'].'?\')" class="btn btn-sm btn-primary"><span  aria-hidden="true"></span> Edit </a>
 									
 								</td></tr>
 							';
