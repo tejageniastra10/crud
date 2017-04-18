@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>EDIT DATA </title>
+	<title>EDIT DATA MAHASISWA</title>
 </head>	
 	<style>
 		.content {
@@ -22,21 +22,19 @@
 			
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.php">Data Penduduk</a></li>
-					<li><a href="surat_pengantar.php">Surat Pengantar</a></li>
-					<li><a href="jenis_surat.php">Jenis Surat</a></li>
-					<li><a href="agama.php">Agama</a></li>
+					<li class="active"><a href="index.php">Data Mahasiswa</a></li>
+					<li><a href="jurusan.php">Jurusan</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</nav>
 	<div class="container">
 		<div class="content">
-			<h2>Data Penduduk &raquo; Edit Data</h2>
+			<h2>Data Mahasiswa &raquo; Edit Data</h2>
 			<hr/>
 			<?php
-				$nik = $_GET['nik'];
-				$sql = mysqli_query($koneksi, "SELECT * FROM penduduk WHERE nik='$nik'");
+				$nim = $_GET['nim'];
+				$sql = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE nim='$nim'");
 				if(mysqli_num_rows($sql) == 0)
 				{
 					header("Location: index.php");
@@ -53,13 +51,13 @@
 					$tanggal_lahir	 = $_POST['tanggal_lahir'];
 					$alamat		     = $_POST['alamat'];
 					$jk			     = $_POST['jk'];
-					$no_telp		 = $_POST['no_telp'];
-					$agm_id		 	 = $_POST['agm_id'];
+					$no_tlp			 = $_POST['no_tlp'];
+					$id_jurusan		 = $_POST['id_jurusan'];
 					
-					$update = mysqli_query($koneksi, "UPDATE penduduk SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', jk='$jk',no_telp='$no_telp', agm_id='$agm_id' WHERE nik='$nik'") or die (mysqli_error());
+					$update = mysqli_query($koneksi, "UPDATE mahasiswa SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', jk='$jk',no_tlp='$no_tlp', id_jurusan='$id_jurusan' WHERE nim='$nim'") or die (mysqli_error());
 					if($update)
 					{
-						header("Location: edit.php?nik=".$nik."&pesan=sukses");
+						header("Location: edit.php?nim=".$nik."&pesan=sukses");
 					}
 					else
 					{
@@ -109,15 +107,15 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">No Telepon</label>
 					<div class="col-sm-3">
-						<input type="text" name="no_telp" value="<?php echo $row ['no_telp']; ?>" class="form-control" placeholder="No Telepon" required>
+						<input type="text" name="no_tlp" value="<?php echo $row ['no_tlp']; ?>" class="form-control" placeholder="No Telepon" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Agama</label>
 					<div class="col-sm-2">
-						<select name="agm_id" class="form-control" value="<?php echo $row ['agm_id']; ?>" class="form-control" placeholder="Agama" required>
+						<select name="id_jurusan" class="form-control" value="<?php echo $row ['id_jurusan']; ?>" class="form-control" placeholder="Jurusan" required>
 						<?php 
-							$sql = mysqli_query($koneksi, "SELECT * FROM agama ORDER BY agm_id ASC");
+							$sql = mysqli_query($koneksi, "SELECT * FROM jurusan ORDER BY id_jurusan ASC");
 							if(mysqli_num_rows($sql) == 0)
 							{
 								echo '<tr><td colspan="8">Data Tidak Ditemukan.</td></tr>';
@@ -127,7 +125,7 @@
 								echo '<option value=""> Pilih </option>'; 
 								while($row = mysqli_fetch_assoc($sql))
 								{
-									echo  '<option value='.$row['agm_id'].'>'.$row['agm_nama'].'</option>';
+									echo  '<option value='.$row['id_jurusan'].'>'.$row['nama_jurusan'].'</option>';
 			 					}
 			 				}
 		 				?>

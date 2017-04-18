@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>EDIT DATA </title>
+	<title>EDIT DATA JURUSAN</title>
 </head>	
 	<style>
 		.content {
@@ -21,24 +21,22 @@
 		<div class="container">
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="index.php">Data Penduduk</a></li>
-					<li><a href="surat_pengantar.php">Surat Pengantar</a></li>
-					<li><a href="jenis_surat.php">Jenis Surat</a></li>
-					<li class="active"><a href="agama.php">Agama</a></li>
+					<li><a href="index.php">Data Mahasiswa</a></li>
+					<li class="active"><a href="jurusan.php">Jurusan</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</nav>
 	<div class="container">
 		<div class="content">
-			<h2>Data Agama &raquo; Edit Data Agama</h2>
+			<h2>Data Jurusan &raquo; Edit Data Jurusan</h2>
 			<hr/>
 			<?php
-				$agm_id = $_GET['agm_id'];
-				$sql = mysqli_query($koneksi, "SELECT * FROM agama WHERE agm_id='$agm_id'");
+				$id_jurusan = $_GET['id_jurusan'];
+				$sql = mysqli_query($koneksi, "SELECT * FROM jurusan WHERE id_jurusan='$id_jurusan'");
 				if(mysqli_num_rows($sql) == 0)
 				{
-					header("Location: agama.php");
+					header("Location: jurusan.php");
 				}
 				else
 				{
@@ -47,11 +45,11 @@
 				if(isset($_POST['save4']))
 				{
 					//$jenis_id	 	 = $_POST['jenis_id'];
-					$agm_nama		     = $_POST['agm_nama'];
-					$update = mysqli_query($koneksi, "UPDATE agama SET agm_nama='$agm_nama' WHERE agm_id='$agm_id'") or die (mysqli_error());
+					$nama_jurusan		     = $_POST['nama_jurusan'];
+					$update = mysqli_query($koneksi, "UPDATE jurusan SET nama_jurusan='$nama_jurusan' WHERE id_jurusan='$id_jurusan'") or die (mysqli_error());
 					if($update)
 					{
-						header("Location: edit_agama.php?agm_id=".$agm_id."&pesan=sukses");
+						header("Location: edit_jurusan.php?id_agama=".$id_agama."&pesan=sukses");
 					}
 					else
 					{
@@ -65,9 +63,9 @@
 			?>
 			<form class="form-horizontal" action="" method="post">
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Nama Agama</label>
+					<label class="col-sm-3 control-label">Nama Jurusan</label>
 					<div class="col-sm-4">
-						<input type="text" name="agm_nama" value="<?php echo $row ['agm_nama']; ?>" class="form-control" placeholder="Nama Agama" required>
+						<input type="text" name="nama_jurusan" value="<?php echo $row ['nama_jurusan']; ?>" class="form-control" placeholder="Nama Jurusan" required>
 					</div>
 				</div>
                 <br>
@@ -75,7 +73,7 @@
 					<label class="col-sm-4 control-label">&nbsp;</label>
 					<div class="col-sm-6">
 						<input type="submit" name="save4" class="btn btn-sm btn-primary" value="Simpan">
-						<a href="agama.php" class="btn btn-sm btn-danger">Kembali</a>
+						<a href="jurusan.php" class="btn btn-sm btn-danger">Kembali</a>
 					</div>
 				</div>
 			</form>
