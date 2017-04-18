@@ -63,7 +63,7 @@
 					<th>Pilihan</th>
 				</tr>
 				<?php
-					$sql = mysqli_query($koneksi, "SELECT * FROM mahasiswa join jurusan on mahasiswa.jurusan_id=jurusan.jurusan_id  ");
+					$sql = mysqli_query($koneksi, "SELECT * FROM mahasiswa join jurusan on mahasiswa.id_jurusan=jurusan.id_jurusan  ") or die (mysqli_error($koneksi));
 					if(mysqli_num_rows($sql) == 0)
 					{
 						echo '<tr><td colspan="8">Data Tidak Ditemukan.</td></tr>';

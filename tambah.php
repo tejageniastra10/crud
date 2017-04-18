@@ -21,46 +21,44 @@
 		<div class="container">
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.php">Data Penduduk</a></li>
-					<li><a href="surat_pengantar.php">Surat Pengantar</a></li>
-					<li><a href="jenis_surat.php">Jenis Surat</a></li>
-					<li><a href="agama.php">Agama</a></li>
+					<li class="active"><a href="index.php">Data Mahasiswa</a></li>
+					<li><a href="jurusan.php">Jurusan</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</nav>
 	<div class="container">
 		<div class="content">
-			<h2>Data Penduduk &raquo; Tambah Data</h2>
+			<h2>Data Mahasiswa &raquo; Tambah Data</h2>
 			<hr />
 			<?php
 				if(isset($_POST['add']))
 				{
-					$nik		     = $_POST['nik'];
+					$nim		     = $_POST['nim'];
 					$nama		     = $_POST['nama'];
 					$tempat_lahir	 = $_POST['tempat_lahir'];
 					$tanggal_lahir	 = $_POST['tanggal_lahir'];
 					$alamat		     = $_POST['alamat'];
 					$jk		 	 	 = $_POST['jk'];
-					$no_telp		 = $_POST['no_telp'];
-					$agm_id		     = $_POST['agm_id'];
+					$no_tlp		 	 = $_POST['no_tlp'];
+					$id_jurusan		 = $_POST['id_jurusan'];
 					
-					$cek = mysqli_query($koneksi, "SELECT * FROM penduduk WHERE nik='$nik'");
+					$cek = mysqli_query($koneksi, "SELECT * FROM mahasiswa WHERE nim='$nim'")or die (mysqli_error($koneksi));
 					if(mysqli_num_rows($cek) == 0)
 					{
-						$insert = mysqli_query($koneksi, "INSERT INTO penduduk(nik, nama, tempat_lahir, tanggal_lahir, alamat, jk, no_telp, agm_id) VALUES('$nik','$nama', '$tempat_lahir', '$tanggal_lahir', '$alamat', '$jk', '$no_telp', '$agm_id')") or die(mysqli_error());
+						$insert = mysqli_query($koneksi, "INSERT INTO mahasiswa(nim, nama, tempat_lahir, tanggal_lahir, alamat, jk, no_tlp, id_jurusan) VALUES('$nim','$nama', '$tempat_lahir', '$tanggal_lahir', '$alamat', '$jk', '$no_tlp', '$id_jurusan')") or die(mysqli_error());
 							if($insert)
 							{
-								echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data Penduduk Berhasil Di Simpan.</div>';
+								echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data Mahasiswa Berhasil Di Simpan.</div>';
 							}
 							else
 							{
-								echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Ups, Data Penduduk Gagal Di simpan !</div>';
+								echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Ups, Data Mahasiswa Gagal Di simpan !</div>';
 							}	
 					}
 					else
 					{
-						echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>NIK Sudah Ada..!</div>';
+						echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>NIM Sudah Ada..!</div>';
 					}
 				}
 			?>
@@ -68,7 +66,7 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">NIK</label>
 					<div class="col-sm-2">
-						<input type="text" name="nik" class="form-control" placeholder="NIK" required>
+						<input type="text" name="nim" class="form-control" placeholder="NIM" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -108,15 +106,15 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">No hp</label>
 					<div class="col-sm-2">
-						<input type="text" name="no_telp" class="form-control" placeholder="No Telepon" required>
+						<input type="text" name="no_tlp" class="form-control" placeholder="No Telepon" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Agama</label>
+					<label class="col-sm-3 control-label">Jurusan</label>
 					<div class="col-sm-2">
-					<select name="agm_id" class="form-control" required>
+					<select name="id_jurusan" class="form-control" required>
 					<?php 
-						$sql = mysqli_query($koneksi, "SELECT * FROM agama ORDER BY agm_id ASC");
+						$sql = mysqli_query($koneksi, "SELECT * FROM jurusan ORDER BY id_jurusan ASC");
 						if(mysqli_num_rows($sql) == 0)
 						{
 							echo '<tr><td colspan="8">Data Tidak Ditemukan.</td></tr>';
@@ -126,7 +124,7 @@
 							echo '<option value=""> Pilih </option>'; 
 							while($row = mysqli_fetch_assoc($sql))
 							{
-								echo  '<option value='.$row['agm_id'].'>'.$row['agm_nama'].'</option>';
+								echo  '<option value='.$row['id_jurusan'].'>'.$row['nama_jurusan'].'</option>';
 		 					}
 		 				}
 	 				?>

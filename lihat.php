@@ -15,19 +15,19 @@
 	}
 </style>
 <head>
-	<title>DATA PENDUDUK</title>
+	<title>DATA MAHASISWA</title>
 </head>
 <!--/ navigasion -->
 <body>
 	<div class="container">
 		<div class="content">
-			<h2>Data Penduduk</h2>
+			<h2>Data Mahasiswa</h2>
 			<hr />
 			<?php
 				if(isset($_GET['aksi']) == 'delete')
 				{
-					$nik = $_GET['nik'];
-						$delete = mysqli_query($koneksi, "DELETE FROM penduduk WHERE nik='$nik'");
+					$nik = $_GET['nim'];
+						$delete = mysqli_query($koneksi, "DELETE FROM mahasiswa WHERE nim='$nim'");
 						if($delete)
 						{
 							echo '<div class="alert alert-primary alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Data berhasil dihapus.</div>';
@@ -54,7 +54,7 @@
 					<th>Pilihan</th>
 				</tr>
 				<?php
-					$sql = mysqli_query($koneksi, "SELECT * FROM penduduk ORDER BY nik ASC");
+					$sql = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY nim ASC");
 					if(mysqli_num_rows($sql) == 0)
 					{
 						echo '<tr><td colspan="8">Data Tidak Ditemukan.</td></tr>';
@@ -67,20 +67,20 @@
 							echo '
 							<tr>
 								<td>'.$no.'</td>
-								<td>'.$row['nik'].'</td>
+								<td>'.$row['nim'].'</td>
 								<td>'.$row['nama'].'</a></td>
 	                            <td>'.$row['tempat_lahir'].'</td>
 	                            <td>'.$row['tanggal_lahir'].'</td>
 	                            <td>'.$row['alamat'].'</td>
 	                            <td>'.$row['JK'].'</td>
-								<td>'.$row['no_hp'].'</td>
-	                            <td>'.$row['agm_nama'].'</td>
+								<td>'.$row['no_tlp'].'</td>
+	                            <td>'.$row['nama_jurusan'].'</td>
 	                            ';
 							echo '
 								</td>
 								<td>
 									
-									<a href="index.php?aksi=delete&nik='.$row['nik'].'" title="Hapus Data" onclick="return confirm(\'Anda yakin akan menghapus data '.$row['nama'].'?\')" class="btn btn-danger btn-sm"><span  aria-hidden="true"></span>Hapus</a>
+									<a href="index.php?aksi=delete&nim='.$row['nim'].'" title="Hapus Data" onclick="return confirm(\'Anda yakin akan menghapus data '.$row['nama'].'?\')" class="btn btn-danger btn-sm"><span  aria-hidden="true"></span>Hapus</a>
 								</td></tr>
 							';
 							$no++;
