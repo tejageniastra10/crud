@@ -8,6 +8,8 @@
 <html lang="en">
 <head>
 	<title>TAMBAH DATA </title>
+	<link rel="stylesheet" type="text/css" href="bootstrapValidator.css">
+	<script type="text/javascript" src="bootstrapValidator.js"></script>
 </head>	
 <style>
 	.content {
@@ -62,17 +64,17 @@
 					}
 				}
 			?>
-			<form class="form-horizontal" action="" method="post">
+			<form id="form2" class="form-horizontal" action="" method="post">
 				<div class="form-group">
 					<label class="col-sm-3 control-label">NIK</label>
 					<div class="col-sm-2">
-						<input type="text" name="nim" class="form-control" placeholder="NIM" required>
+						<input type="text" name="nim" id="nik1" class="form-control" placeholder="NIM">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Nama</label>
 					<div class="col-sm-4">
-						<input type="text" name="nama" class="form-control" placeholder="Nama" required>
+						<input type="text" name="nama" id="name" class="form-control" placeholder="Nama" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -141,6 +143,22 @@
 					</div>
 				</div>
 			</form>
+			<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					var validator = $("#form2").bootstrapValidator({
+						fields : {
+							nim : {
+								validators : {
+									notEmpty : {
+										message : "test"
+									}
+								}
+							}
+						}
+					})
+				});
+			</script>
 		</div>
 	</div>
 </body>
