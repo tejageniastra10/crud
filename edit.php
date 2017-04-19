@@ -8,6 +8,12 @@
 <html lang="en">
 <head>
 	<title>EDIT DATA MAHASISWA</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>  
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css"/>
+  	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"> </script>
 </head>	
 	<style>
 		.content {
@@ -69,7 +75,7 @@
 					echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
 				}
 			?>
-			<form class="form-horizontal" action="" method="post">
+			<form id="form2" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Nama</label>
 					<div class="col-sm-4">
@@ -141,6 +147,122 @@
 					</div>
 				</div>
 			</form>
+			<script type="text/javascript">
+
+    $(document).ready(function() {
+    $('#form2').bootstrapValidator({
+        
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            nim: {
+                validators: {
+                    notEmpty: {
+                        message: 'NIK harus diisi'
+                    },
+                    stringLength: {
+                        max: 5,
+                        message: 'NIK harus diisi maksimal 5 karakter'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'karakter tidak valid'
+                    },
+                     regexp: {
+                        regexp: /^[0-9]/,
+                        message: 'harus berupa angka'
+                    },
+                    
+                }
+            },
+            nama: {
+                validators: {
+                    notEmpty: {
+                        message: 'nama harus diisi'
+                    },
+                    regexp: {
+                        regexp: /[^0-9]/,
+                        message: 'harus berupa hurup'
+                    }
+                    
+                }
+            },
+            tempat_lahir: {
+                validators: {
+                    notEmpty: {
+                        message: 'tempat lahir harus diisi'
+                    },
+                    stringLength: {
+                        max: 50,
+                        message: 'harus dibawah 50 kaakter'
+                    },
+                    regexp: {
+                        regexp: /[0-9]/,
+                        message: 'harus berupa hurup'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'karakter tidak valid'
+                    }
+                }
+            },
+            alamat: {
+                validators: {
+                    notEmpty: {
+                        message: 'alamat harus diisi'
+                    },
+                    stringLength: {
+                        max: 100,
+                        message: 'karakter yang diinputan minimal 100'
+                    }
+                }
+            },
+            jk: {
+                validators: {
+                    notEmpty: {
+                        message: 'alamat harus diisi'
+                    }
+                }
+            },
+            no_tlp: {
+                validators: {
+                    notEmpty: {
+                        message: 'no telopon harus diisi'
+                    },
+                    stringLength: {
+                        max: 11,
+                        message: 'maksimal 11 karakter'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'karakter tidak valid'
+                    },
+                     regexp: {
+                        regexp: /^[0-9]/,
+                        message: 'harus berupa angka'
+                    }
+                }
+            },
+            id_jurusan: {
+                validators: {
+                    notEmpty: {
+                        message: 'jurusan harus diisi'
+                    }
+                    
+                }
+            }
+        }
+    })
+    .on('success.field.fv', function(e, data) {
+            if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
+                data.fv.disableSubmitButtons(true);
+            }
+        });
+});
+</script>
 		</div>
 	</div>
 </body>
