@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2017 at 05:11 PM
+-- Generation Time: Apr 19, 2017 at 11:47 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -31,13 +31,20 @@ CREATE TABLE `jurusan` (
   `nama_jurusan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `jurusan`
+--
+
+INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
+(1, 'aku1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mahasiiswa`
+-- Table structure for table `mahasiswa`
 --
 
-CREATE TABLE `mahasiiswa` (
+CREATE TABLE `mahasiswa` (
   `nim` int(5) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `tempat_lahir` varchar(30) NOT NULL,
@@ -45,15 +52,16 @@ CREATE TABLE `mahasiiswa` (
   `alamat` varchar(50) NOT NULL,
   `jk` char(10) NOT NULL,
   `no_tlp` varchar(11) NOT NULL,
-  `id_jurusan` int(5) NOT NULL
+  `id_jurusan` int(5) NOT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mahasiiswa`
+-- Dumping data for table `mahasiswa`
 --
 
-INSERT INTO `mahasiiswa` (`nim`, `nama`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `jk`, `no_tlp`, `id_jurusan`) VALUES
-(3432, 'dfsf', 'sfds', '2017-04-04', 'sfsdf', 'sdfds', '2321', 0);
+INSERT INTO `mahasiswa` (`nim`, `nama`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `jk`, `no_tlp`, `id_jurusan`, `foto`) VALUES
+(21421, 'sdds', 'asfsa', '2017-04-04', 'asfsaf', 'Laki-Laki', '24214', 1, '');
 
 --
 -- Indexes for dumped tables
@@ -66,9 +74,9 @@ ALTER TABLE `jurusan`
   ADD PRIMARY KEY (`id_jurusan`);
 
 --
--- Indexes for table `mahasiiswa`
+-- Indexes for table `mahasiswa`
 --
-ALTER TABLE `mahasiiswa`
+ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`nim`);
 
 --
@@ -79,12 +87,12 @@ ALTER TABLE `mahasiiswa`
 -- AUTO_INCREMENT for table `jurusan`
 --
 ALTER TABLE `jurusan`
-  MODIFY `id_jurusan` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jurusan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `mahasiiswa`
+-- AUTO_INCREMENT for table `mahasiswa`
 --
-ALTER TABLE `mahasiiswa`
-  MODIFY `nim` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3433;
+ALTER TABLE `mahasiswa`
+  MODIFY `nim` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21422;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

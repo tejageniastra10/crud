@@ -111,7 +111,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Agama</label>
+					<label class="col-sm-3 control-label">Jurusan</label>
 					<div class="col-sm-2">
 						<select name="id_jurusan" class="form-control" value="<?php echo $row ['id_jurusan']; ?>" class="form-control" placeholder="Jurusan" required>
 						<?php 
