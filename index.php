@@ -82,10 +82,13 @@
 							echo '
 								</td>
 								<td>
+									<a href="#" class="btn btn-sm btn-info"  id=' .$row["nim"].'><span  aria-hidden="true"></span> Detail </a>
+								
+									<a href="edit.php?nim='.$row['nim'].'" title="Edit Data" onclick="return confirm(\'Anda yakin akan mengedit data '.$row['nama'].'?\')" class="btn btn-sm btn-primary"><span  aria-hidden="true"></span> Edit </a>
+									
 									<a href="index.php?aksi=delete&nim='.$row['nim'].'" title="Hapus Data" onclick="return confirm(\'Anda yakin akan menghapus data '.$row['nama'].'?\')" class="btn btn-danger btn-sm"><span  aria-hidden="true"></span>Hapus</a>
 
-									<a href="edit.php?nim='.$row['nim'].'" title="Edit Data" onclick="return confirm(\'Anda yakin akan mengedit data '.$row['nama'].'?\')" class="btn btn-sm btn-primary"><span  aria-hidden="true"></span> Edit </a>
-									<a href="#" class="btn btn-sm btn-info"  id=' .$row["nim"].'><span  aria-hidden="true"></span> Detail </a>
+									
 								</td></tr>
 							';
 							$no++;
