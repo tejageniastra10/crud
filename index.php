@@ -11,6 +11,10 @@
 		margin-top: 80px;
 	}
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
 	<title>DATA MAHASISWA</title>
 </head>
@@ -81,6 +85,7 @@
 									<a href="index.php?aksi=delete&nim='.$row['nim'].'" title="Hapus Data" onclick="return confirm(\'Anda yakin akan menghapus data '.$row['nama'].'?\')" class="btn btn-danger btn-sm"><span  aria-hidden="true"></span>Hapus</a>
 
 									<a href="edit.php?nim='.$row['nim'].'" title="Edit Data" onclick="return confirm(\'Anda yakin akan mengedit data '.$row['nama'].'?\')" class="btn btn-sm btn-primary"><span  aria-hidden="true"></span> Edit </a>
+									<a href="#" class="btn btn-sm btn-info"  id=' .$row["nim"].'><span  aria-hidden="true"></span> Detail </a>
 								</td></tr>
 							';
 							$no++;
@@ -91,5 +96,40 @@
 			</div>
 		</div>
 	</div>
+
+	 
+
+<div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Anggota</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+            $(document).ready(function (){
+                $(".btn-info").click(function (e){
+                    var m = $(this).attr("id");
+                    $.ajax({
+                        url: "detail.php",
+                        type: "GET",
+                        data : {nim: m,},
+                        success: function (ajaxData){
+                            $("#ModalDetail").html(ajaxData);
+                            $("#ModalDetail").modal('show',{backdrop: 'true'});
+                        }
+                    });
+                });
+            });
+        </script>
+
+
 </body>
 </html>
