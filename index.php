@@ -55,7 +55,6 @@
 					<th>Nim</th>
 					<th>Nama</th>
                     <th>Foto</th>
-                    <th>Tanggal Lahir</th>
 					<th>Pilihan</th>
 				</tr>
 				<?php
