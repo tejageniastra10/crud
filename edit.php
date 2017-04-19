@@ -8,6 +8,12 @@
 <html lang="en">
 <head>
 	<title>EDIT DATA MAHASISWA</title>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>  
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css"/>
+  	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"> </script>
 </head>	
 	<style>
 		.content {
@@ -53,8 +59,12 @@
 					$jk			     = $_POST['jk'];
 					$no_tlp			 = $_POST['no_tlp'];
 					$id_jurusan		 = $_POST['id_jurusan'];
-					
-					$update = mysqli_query($koneksi, "UPDATE mahasiswa SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', jk='$jk',no_tlp='$no_tlp', id_jurusan='$id_jurusan' WHERE nim='$nim'") or die (mysqli_error());
+					$foto = $_FILES['foto']['name'];
+					$tmp = $_FILES['foto']['tmp_name'];
+					$fotobaru = date('dmYHis').$foto;
+					$path = "foto/".$fotobaru;
+				if(move_uploaded_file($tmp, $path)){
+					$update = mysqli_query($koneksi, "UPDATE mahasiswa SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', jk='$jk',no_tlp='$no_tlp', id_jurusan='$id_jurusan', foto='$fotobaru' WHERE nim='$nim'") or die (mysqli_error());
 					if($update)
 					{
 						header("Location: edit.php?nim=".$nik."&pesan=sukses");
@@ -63,13 +73,14 @@
 					{
 						echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
 					}
+					}
 				}
 				if(isset($_GET['pesan']) == 'sukses')
 				{
 					echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
 				}
 			?>
-			<form class="form-horizontal" action="" method="post">
+			<form id="form2" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Nama</label>
 					<div class="col-sm-4">
@@ -132,6 +143,12 @@
 						</select>
 					</div>
 				</div>	
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Foto</label>
+					<div class="col-sm-3">
+						<input type="file" name="foto" class="form-control" placeholder="foto" required>
+					</div>
+				</div>
 				<br>
 				<div class="form-group">
 					<label class="col-sm-5 control-label">&nbsp;</label>
@@ -141,6 +158,122 @@
 					</div>
 				</div>
 			</form>
+			<script type="text/javascript">
+
+    $(document).ready(function() {
+    $('#form2').bootstrapValidator({
+        
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            nim: {
+                validators: {
+                    notEmpty: {
+                        message: 'NIM harus diisi'
+                    },
+                    stringLength: {
+                        max: 5,
+                        message: 'NIM harus diisi maksimal 5 karakter'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'karakter tidak valid'
+                    },
+                     regexp: {
+                        regexp: /^[0-9]/,
+                        message: 'harus berupa angka'
+                    },
+                    
+                }
+            },
+            nama: {
+                validators: {
+                    notEmpty: {
+                        message: 'nama harus diisi'
+                    },
+                    regexp: {
+                        regexp: /[^0-9]/,
+                        message: 'harus berupa hurup'
+                    }
+                    
+                }
+            },
+            tempat_lahir: {
+                validators: {
+                    notEmpty: {
+                        message: 'tempat lahir harus diisi'
+                    },
+                    stringLength: {
+                        max: 50,
+                        message: 'harus dibawah 50 kaakter'
+                    },
+                    regexp: {
+                        regexp: /[0-9]/,
+                        message: 'harus berupa hurup'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'karakter tidak valid'
+                    }
+                }
+            },
+            alamat: {
+                validators: {
+                    notEmpty: {
+                        message: 'alamat harus diisi'
+                    },
+                    stringLength: {
+                        max: 100,
+                        message: 'karakter yang diinputan minimal 100'
+                    }
+                }
+            },
+            jk: {
+                validators: {
+                    notEmpty: {
+                        message: 'alamat harus diisi'
+                    }
+                }
+            },
+            no_tlp: {
+                validators: {
+                    notEmpty: {
+                        message: 'no telopon harus diisi'
+                    },
+                    stringLength: {
+                        max: 11,
+                        message: 'maksimal 11 karakter'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'karakter tidak valid'
+                    },
+                     regexp: {
+                        regexp: /^[0-9]/,
+                        message: 'harus berupa angka'
+                    }
+                }
+            },
+            id_jurusan: {
+                validators: {
+                    notEmpty: {
+                        message: 'jurusan harus diisi'
+                    }
+                    
+                }
+            }
+        }
+    })
+    .on('success.field.fv', function(e, data) {
+            if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
+                data.fv.disableSubmitButtons(true);
+            }
+        });
+});
+</script>
 		</div>
 	</div>
 </body>

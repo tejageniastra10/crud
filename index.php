@@ -77,7 +77,7 @@
 								<td>'.$no.'</td>
 								<td>'.$row['nim'].'</td>
 								<td>'.$row['nama'].'</a></td>
-	                            <td>'.$row['foto'].'</td>
+	                            <td><img src=foto/'.$row['foto'].' width=150 px height=200 px></td>
 	                            ';
 							echo '
 								</td>
