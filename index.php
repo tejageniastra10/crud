@@ -54,12 +54,8 @@
                     <th>No</th>
 					<th>Nim</th>
 					<th>Nama</th>
-                    <th>Tempat Lahir</th>
+                    <th>Foto</th>
                     <th>Tanggal Lahir</th>
-					<th>Alamat</th>
-					<th>Jenis Kelamin</th>
-					<th>No HP</th>
-					<th>Jurusan</th>
 					<th>Pilihan</th>
 				</tr>
 				<?php
@@ -78,12 +74,7 @@
 								<td>'.$no.'</td>
 								<td>'.$row['nim'].'</td>
 								<td>'.$row['nama'].'</a></td>
-	                            <td>'.$row['tempat_lahir'].'</td>
-	                            <td>'.$row['tanggal_lahir'].'</td>
-	                            <td>'.$row['alamat'].'</td>
-	                            <td>'.$row['jk'].'</td>
-								<td>'.$row['no_tlp'].'</td>
-	                            <td>'.$row['nama_jurusan'].'</td>
+	                            <td>'.$row['foto'].'</td>
 	                            ';
 							echo '
 								</td>
