@@ -59,8 +59,12 @@
 					$jk			     = $_POST['jk'];
 					$no_tlp			 = $_POST['no_tlp'];
 					$id_jurusan		 = $_POST['id_jurusan'];
-					
-					$update = mysqli_query($koneksi, "UPDATE mahasiswa SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', jk='$jk',no_tlp='$no_tlp', id_jurusan='$id_jurusan' WHERE nim='$nim'") or die (mysqli_error());
+					$foto = $_FILES['foto']['name'];
+					$tmp = $_FILES['foto']['tmp_name'];
+					$fotobaru = date('dmYHis').$foto;
+					$path = "foto/".$fotobaru;
+				if(move_uploaded_file($tmp, $path)){
+					$update = mysqli_query($koneksi, "UPDATE mahasiswa SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', jk='$jk',no_tlp='$no_tlp', id_jurusan='$id_jurusan', foto='$fotobaru' WHERE nim='$nim'") or die (mysqli_error());
 					if($update)
 					{
 						header("Location: edit.php?nim=".$nik."&pesan=sukses");
@@ -68,6 +72,7 @@
 					else
 					{
 						echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
+					}
 					}
 				}
 				if(isset($_GET['pesan']) == 'sukses')
@@ -138,6 +143,12 @@
 						</select>
 					</div>
 				</div>	
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Foto</label>
+					<div class="col-sm-3">
+						<input type="file" name="foto" class="form-control" placeholder="foto" required>
+					</div>
+				</div>
 				<br>
 				<div class="form-group">
 					<label class="col-sm-5 control-label">&nbsp;</label>
@@ -161,11 +172,11 @@
             nim: {
                 validators: {
                     notEmpty: {
-                        message: 'NIK harus diisi'
+                        message: 'NIM harus diisi'
                     },
                     stringLength: {
                         max: 5,
-                        message: 'NIK harus diisi maksimal 5 karakter'
+                        message: 'NIM harus diisi maksimal 5 karakter'
                     },
                     regexp: {
                         regexp: /^[a-zA-Z0-9_]+$/,
