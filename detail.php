@@ -77,7 +77,8 @@
                         
                          <div class="col-lg-3 control-label">
                              <a href="2.jpg" target="_blank">
-                                <img src="2.jpg" alt="Fjords"  width="180" height="190">
+                                <?php echo '<img src=foto/'.$row['foto'].' width="180" height="190">'  ?>  
+                                
                              </a>
                           
                         </div>
