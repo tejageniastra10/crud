@@ -2,7 +2,7 @@
 
     include 'koneksi.php';
     $nim = $_GET['nim'];
-    $sql = mysqli_query($koneksi,"SELECT * FROM mahasiswa where nim='$nim'");
+    $sql = mysqli_query($koneksi,"SELECT * FROM mahasiswa join jurusan on mahasiswa.id_jurusan=jurusan.id_jurusan where nim='$nim'");
     
     while($row=  mysqli_fetch_array($sql)){
 ?>
@@ -61,6 +61,12 @@
                                             <label class="col-lg-6 control-label">Jenis Kelamin</label>
                                                 <div class="col-lg-5">
                                                     <input style="width: 200px;"  class="form-control" type="text" name="jenis_kelamin" value="<?php echo $row['jk']; ?>" readonly/>
+                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-6 control-label">Jurusan</label>
+                                                <div class="col-lg-5">
+                                                    <input style="width: 200px;"  class="form-control" type="text" name="jurusan" value="<?php echo $row['nama_jurusan']; ?>" readonly/>
                                                 </div>
                                         </div>
                                         <div class="form-group">
